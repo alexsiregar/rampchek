@@ -37,6 +37,7 @@
      </div>
    </div>
  </div>
+ <script src="<?= base_url('assets/'); ?>js/script.js"></script>
 
  <!-- Bootstrap core JavaScript-->
  <script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
@@ -47,6 +48,35 @@
 
  <!-- Custom scripts for all pages-->
  <script src="<?= base_url('assets/'); ?>js/sb-admin-2.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+
+ <script>
+   $(document).ready(function() {
+     $('#hapusModal').on('show.bs.modal', function(event) {
+       var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
+       //  console.log(div);
+       // Untuk mengambil nilai dari data-id="" yang telah kita tempatkan pada link hapus
+       var id = div.data('id')
+
+       var modal = $(this)
+
+       // Mengisi atribut href pada tombol ya yang kita berikan id hapus-true pada modal .
+       modal.find('#hapus-true-data').attr("href", "<?= base_url('home/hapus/'); ?>" + id);
+     });
+
+     $('#hapusUser').on('show.bs.modal', function(event) {
+       var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
+       //  console.log(div);
+       // Untuk mengambil nilai dari data-id="" yang telah kita tempatkan pada link hapus
+       var id = div.data('id')
+
+       var modal = $(this)
+
+       // Mengisi atribut href pada tombol ya yang kita berikan id hapus-true pada modal .
+       modal.find('#hapus-user-data').attr("href", "<?= base_url('home/hapususer/'); ?>" + id);
+     });
+   });
+ </script>
 
  </body>
 

@@ -12,7 +12,34 @@ class Auth extends CI_Controller
 
   public function index()
   {
+    if ($this->session->userdata('email')) {
+      if (!$this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array()) {
+        redirect('auth/logout');
+      }
+    }
 
+    $data['title'] = 'Beranda';
+    if ($this->session->userdata('email')) {
+      $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+    }
+    $this->load->view('index', $data);
+  }
+
+  public function regulasi()
+  {
+    if ($this->session->userdata('email')) {
+      if (!$this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array()) {
+        redirect('auth/logout');
+      }
+    }
+
+    $data['title'] = 'Regulasi';
+    $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+    $this->load->view('regulasi', $data);
+  }
+
+  public function login()
+  {
     if ($this->session->userdata('email')) {
       redirect('home');
     }
@@ -44,23 +71,19 @@ class Auth extends CI_Controller
         redirect('home');
       } else {
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong password!</div>');
-        redirect('auth');
+        redirect('auth/login');
       }
     } else {
       $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Username is not registered!</div>');
-      redirect('auth');
+      redirect('auth/login');
     }
   }
+
 
   public function logout()
   {
     $this->session->unset_userdata('email');
     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">You have been logged out!</div>');
     redirect('auth');
-  }
-
-  public function __destruct()
-  {
-    $this->session->unmark_flash('message');
   }
 }

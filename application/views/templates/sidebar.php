@@ -2,9 +2,9 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
   <!-- Sidebar - Brand -->
-  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-    <div class="sidebar-brand-icon rotate-n-15">
-      <i class="fas fa-car"></i>
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('/') ?>">
+    <div class="sidebar-brand-icon">
+      <i><img src="<?= base_url(); ?>assets/img/logo.png" alt="" height="50px" /></i>
     </div>
     <div class="sidebar-brand-text mx-3">RAMPCHEK</div>
   </a>
@@ -33,15 +33,32 @@
   <?php $active = $title == 'Edit Profil'  ? 'active' : '' ?>
   <li class="nav-item <?= $active; ?>">
     <a class="nav-link" href="<?= base_url('home/edit'); ?>">
-      <i class="fas fa-fw fa-chart-area"></i>
+      <i class="fas fa-fw fa-user-edit"></i>
       <span>Edit Profil</span></a>
   </li>
 
-  <!-- Nav Item - Tables -->
-  <li class="nav-item">
-    <a class="nav-link" href="tables.html">
-      <i class="fas fa-fw fa-table"></i>
-      <span>Tables</span></a>
+  <?php if ($user['role'] == 1) { ?>
+    <?php $active = $title == 'Tambah User'  ? 'active' : '' ?>
+    <li class="nav-item <?= $active; ?>">
+      <a class="nav-link" href="<?= base_url('home/tambahuser'); ?>">
+        <i class="fas fa-fw fa-user-plus"></i>
+        <span>Tambah user</span></a>
+    </li>
+  <?php } ?>
+
+  <?php $active = $title == 'Pengecekan'  ? 'active' : '' ?>
+  <li class="nav-item <?= $active; ?>">
+    <a class="nav-link" href="<?= base_url('home/pengecekan'); ?>">
+      <i class="fas fa-fw fa-save"></i>
+      <span>Pengecekan</span></a>
+  </li>
+
+
+  <?php $active = $title == 'Laporan'  ? 'active' : '' ?>
+  <li class="nav-item <?= $active; ?>">
+    <a class="nav-link" href="<?= base_url('home/laporan'); ?>">
+      <i class="fas fa-fw fa-file-alt"></i>
+      <span>Laporan</span></a>
   </li>
 
   <li class="nav-item">
